@@ -1,0 +1,53 @@
+name: maristcommerce
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.6
+  flutter_lints: ^4.0.0
+  firebase_core: any
+  firebase_auth: any
+  carousel_slider: any
+  css_colors: 
+  firebase_storage: ^11.7.5
+  provider: ^6.1.2
+  google_sign_in: ^6.2.1
+  shared_preferences: ^2.2.3
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/background.jpg
+    - images/logo.png
+    - images/1.jpg
+    - images/2.jpg
+    - images/3.jpg
+    - images/4.jpg
+    - images/5.jpg
+    - images/m1.jpg
+    - images/m2.jpg
+    - images/m3.jpg
+    - images/m4.jpg
+    - images/m5.jpg
+    - images/google_logo.png
+
+fonts:
+  - family: Syne
+    fonts:
+      - assets: 
+        - fonts/Syne-VariableFont_wght.ttf
+
