@@ -47,24 +47,6 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
-                  },
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

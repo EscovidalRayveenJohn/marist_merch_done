@@ -36,6 +36,7 @@ class _MerchState extends State<Merch> {
   ];
 
   bool _isDisposed = false;
+  String searchText = '';
 
   @override
   void initState() {
@@ -70,88 +71,107 @@ class _MerchState extends State<Merch> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Color(0xFF00BE62)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Explore Our Upcoming Merch',
-                      style: GoogleFonts.roboto(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          currentFocus.focusedChild?.unfocus();
+        }
+      },
+      child: CustomScaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(color: Color(0xFF00BE62)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Explore Our Upcoming Merch',
+                        style: GoogleFonts.roboto(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Discover a variety of products coming soon',
-                      style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        color: Colors.white,
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Discover a variety of products coming soon',
+                        style: GoogleFonts.roboto(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Search...',
-                                contentPadding: EdgeInsets.only(left: 15),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Search ...',
+                                  contentPadding: EdgeInsets.only(left: 15),
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    searchText = value;
+                                  });
+                                },
                               ),
                             ),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.search),
-                          ),
-                        ],
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.search),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: imageUrls.length,
-                itemBuilder: (context, index) {
-                  return _buildMerchItem(
-                    imageUrl: imageUrls[index],
-                    title: titles[index],
-                    subtitle: subtitles[index],
-                    price: pricing[index],
-                  );
-                },
+              Expanded(
+                child: ListView.builder(
+                  itemCount: imageUrls.length,
+                  itemBuilder: (context, index) {
+                    if (titles[index]
+                        .toLowerCase()
+                        .contains(searchText.toLowerCase())) {
+                      return _buildMerchItem(
+                        imageUrl: imageUrls[index],
+                        title: titles[index],
+                        subtitle: subtitles[index],
+                        price: pricing[index],
+                      );
+                    }
+                    return Container();
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        showBottomNavBar: true,
+        initalIndex: 1,
       ),
-      showBottomNavBar: true,
-      initalIndex: 1,
     );
   }
 

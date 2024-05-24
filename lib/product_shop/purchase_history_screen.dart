@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maristcommerce/product_shop/purchase_history.dart';
+import 'package:maristcommerce/screen_pages/home_screen.dart';
 import 'package:maristcommerce/screen_pages/my_account.dart'; // Import MyAccount screen
 import 'package:provider/provider.dart';
 
@@ -37,8 +38,8 @@ class PurchaseHistoryScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => MyAccount()),
-                      ); // Add code to navigate to a screen where the user can make a purchase
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
